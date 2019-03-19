@@ -1,19 +1,34 @@
 import React from 'react';
+import { DropTarget } from 'react-dnd';
+import { Types } from './Constants';
 import Disk from './disk';
 
 import '../styles/Tower.css';
 
-const Tower = ({ id, disks, max, onClick }) => (
-  <div id={id} 
-    className="tower-background flex-container"
-    onClick={onClick}>
-    <div className="tower flex-container vertical">
-      <div className="tower-disks flex-container vertical">
-        {disks.map(disk => <Disk key={disk} value={disk} max={max} />)}
-      </div>
-      <div className="tower-base"></div>
-    </div>
-  </div>
-);
+const towerTarget = {
+  drop(props) {
+    console.log("dropped on ", props.id);
+  }
+}
 
-export default Tower;
+const collect = (connect, monitor) => {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
+  }
+}
+
+const Tower = ({ connectDropTarget, isOver, id, disks, max, onClick }) => {
+  return connectDropTarget(
+    <div id={id} className="tower-background flex-container">
+      <div className="tower flex-container vertical">
+        <div className="tower-disks flex-container vertical">
+          {disks.map(disk => <Disk key={disk} onClick={onClick} value={disk} max={max} towerId={id} />)}
+        </div>
+        <div className="tower-base flex-container"></div>
+      </div>
+    </div>
+  );
+}
+
+export default DropTarget(Types.DISK, towerTarget, collect)(Tower);

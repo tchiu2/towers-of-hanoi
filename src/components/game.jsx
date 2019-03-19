@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import Tower from './tower';
 import { setupBoard, moveDisk } from '../utils/game_utils';
 
@@ -34,23 +36,25 @@ class Game extends Component {
     const [left, middle, right] = this.state.board;
     const { numDisks } = this.props;
     return (
-      <div className="game flex-container">
-        <Tower 
-          id="1"
-          onClick={this.handleClick} 
-          disks={left} 
-          max={numDisks} />
-        <Tower 
-          id="2"
-          onClick={this.handleClick} 
-          disks={middle} 
-          max={numDisks} />
-        <Tower 
-          id="3"
-          onClick={this.handleClick} 
-          disks={right} 
-          max={numDisks} />
-      </div>
+      <DragDropContextProvider backend={HTML5Backend}>
+        <div className="game flex-container">
+          <Tower 
+            id="1"
+            onClick={this.handleClick} 
+            disks={left} 
+            max={numDisks} />
+          <Tower 
+            id="2"
+            onClick={this.handleClick} 
+            disks={middle} 
+            max={numDisks} />
+          <Tower 
+            id="3"
+            onClick={this.handleClick} 
+            disks={right} 
+            max={numDisks} />
+        </div>
+      </DragDropContextProvider>
     );
   }
 }

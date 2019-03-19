@@ -1,0 +1,24 @@
+.tower-background.flex-container {
+  align-items: flex-end;
+}
+
+.tower-background {
+  width: 33%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 45%, #ccc 45% 55%, transparent 55%);
+  margin: 0 20px;
+}
+
+.tower {
+  width: 100%;
+}
+
+.tower-disks {
+  width: 80%;
+}
+
+.tower-base {
+  height: 20px;
+  width: 100%;
+  background-color: green;
+}

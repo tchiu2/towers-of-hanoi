@@ -7,14 +7,20 @@ export const setupBoard = numDisks => {
 }
 
 export const moveDisk = (board, from, to) => {
-  if (isValidMove(board, from, to)) {
-    board[to].unshift(board[from].shift());
+  const result = board.map(tower => [...tower]);
+  if (isValidMove(result, from, to)) {
+    result[to].unshift(result[from].shift());
   }
-  return board;
+  return result;
 }
 
 const isValidMove = (board, from, to) => {
   return from !== to 
     && board[from]
     && (board[to].length === 0 || board[from][0] < board[to][0]);
+}
+
+export const gameWon = (board, numDisks) => {
+  return board[0].length === 0
+    && (board[1].length === numDisks || board[2].length === numDisks);
 }

@@ -6,8 +6,10 @@ import Disk from './disk';
 import '../styles/Tower.css';
 
 const towerTarget = {
-  drop(props) {
-    console.log("dropped on ", props.id);
+  drop(props, monitor) {
+    const from = parseInt(monitor.getItem().towerId) - 1;
+    const to = parseInt(props.id) - 1;
+    props.makeMove(from, to);
   }
 }
 
@@ -18,12 +20,12 @@ const collect = (connect, monitor) => {
   }
 }
 
-const Tower = ({ connectDropTarget, isOver, id, disks, max, onClick }) => {
+const Tower = ({ connectDropTarget, isOver, id, disks, max, moveDisk }) => {
   return connectDropTarget(
     <div id={id} className="tower-background flex-container">
       <div className="tower flex-container vertical">
         <div className="tower-disks flex-container vertical">
-          {disks.map(disk => <Disk key={disk} onClick={onClick} value={disk} max={max} towerId={id} />)}
+          {disks.map(disk => <Disk key={disk} moveDisk={moveDisk} value={disk} max={max} towerId={id} />)}
         </div>
         <div className="tower-base flex-container"></div>
       </div>

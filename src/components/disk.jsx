@@ -11,17 +11,10 @@ const diskSource = {
   },
 
   beginDrag(props) {
-    console.log("dragging from ", props.towerId);
     return { 
       id: props.id,
       towerId: props.towerId
     }
-  },
-
-  endDrag(props, monitor, component) {
-    const item = monitor.getItem();
-    const dropResult = monitor.getDropResult();
-    console.log("finished dragging"); 
   }
 };
 

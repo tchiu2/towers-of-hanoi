@@ -1,5 +1,6 @@
 .game.flex-container {
   align-items: flex-end;
+  width: 80%;
   height: 300px;
   margin: 20px;
   padding: 20px;

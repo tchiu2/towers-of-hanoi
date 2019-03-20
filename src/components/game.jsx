@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tower from './tower';
+import EndScreen from './end_screen';
 import { 
   setupBoard,
   moveDisk,
@@ -12,7 +13,8 @@ class Game extends Component {
     super(props);
     this.state = {
       board: setupBoard(this.props.numDisks),
-      won: false
+      won: false,
+      showModal: false
     };
   }
 
@@ -21,9 +23,24 @@ class Game extends Component {
       board: moveDisk(this.state.board, from, to), 
     }, () => {
       if (gameWon(this.state.board, this.props.numDisks)) {
-        this.setState({ won: true });
+        this.setState({ 
+          won: true,
+          showModal: true
+        });
       }
     });
+  }
+
+  resetGame = () => {
+    this.setState({
+      board: setupBoard(this.props.numDisks),
+      won: false,
+      showModal: false
+    });
+  }
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   }
 
   render() {
@@ -46,6 +63,7 @@ class Game extends Component {
           makeMove={this.makeMove}
           disks={right} 
           max={numDisks} />
+        {this.state.showModal && <EndScreen resetGame={this.resetGame} closeModal={this.closeModal} />}
       </div>
     );
   }

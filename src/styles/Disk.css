@@ -1,5 +1,6 @@
 .disk {
   border-radius: 0.5rem;
-  margin: 2px;
+  margin: 0.1rem;
   background-color: red;
+  max-height: 40px;
 }

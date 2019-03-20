@@ -11,7 +11,7 @@ class App extends Component {
       <DragDropContextProvider backend={HTML5Backend}>
         <div className="App flex-container vertical">
           <h1>Towers of Hanoi</h1>
-          <Game numDisks={1} />
+          <Game numDisks={3} />
         </div>
       </DragDropContextProvider>
     );

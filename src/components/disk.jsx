@@ -34,7 +34,6 @@ const Disk = ({ connectDragSource, isDragging, value, max, towerId }) => {
         backgroundColor: colorPicker(value / max),
         opacity: isDragging ? 0.5 : 1,
       }}>
-      {value}
     </div>
   );
 }
